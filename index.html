@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>HEALTH </title>
+        <!-- 
+
+Highway Template
+
+https://templatemo.com/tm-520-highway
+
+-->
+
+        <meta name="description" content>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/fontAwesome.css">
+        <link rel="stylesheet" href="css/light-box.css">
+        <link rel="stylesheet" href="css/templatemo-style.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.gstatic.com" rel="preconnect">
+        <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+            rel="stylesheet">
+        <link href="assets/vendor/boxicons/css/boxicons.min.css"
+            rel="stylesheet">
+        <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+        <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="assets/css/style.css" rel="stylesheet">
+
+        <link
+            href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900"
+            rel="stylesheet">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+    </head>
+
+    <body>
+
+        <nav class="blacknav">
+            <div class="logo" >
+                <a href="index.html">Health<em> Record</em></a>
+            </div>
+            <!-- <div class="menu-icon"> -->
+        <!-- <span></span>
+      </div> -->
+        </nav>
+        <style>
+        /* .blacknav{opacity:0;} */
+    </style>
+
+        <div id="video-container">
+            <div class="video-overlay"></div>
+            <div class="video-content">
+                <div class="inner">
+                    <h1>Welcome to <br><em>Health Record</em></h1>
+                    <p>Record life</p>
+                    <p>Record health</p>
+                    <div class="scroll-icon">
+                        <a class="scrollTo" data-scrollTo="inTime" href="#"><img
+                                src="img/scroll-icon.png" alt></a>
+                    </div>
+                </div>
+            </div>
+            <video autoplay loop muted>
+                <source src="highway-loop.mp4" type="video/mp4" />
+            </video>
+        </div>
+
+        <br>
+        <center><div>
+                <label>
+
+                    <span>Start</span>
+                    <input type="datetime-local" name="start_time" id="inTime"
+                        value="2023-06-06T00:00" />
+                    <script>
+            // alert("get");
+            // 获取日期输入框元素
+            // const dateInput = document.getElementById("inTime");
+            // document.getElementById("confirm").addEventListener("click", () => {
+                // var dateControl = document.querySelector('input[type="datetime-local"]');
+                // var time1 = dateControl.value;
+                // var time2 = time1.replace('T', '%20');
+                // alert("get");
+            // })
+            
+
+            // 将输入框的值转换为Date对象
+            // const selectedDate = new Date(dateInput.value);
+
+            // 检查是否成功转换日期字符串并且没有 NaN 值
+            // if (!isNaN(selectedDate.getTime())) {
+            // 在控制台日志中输出得到的日期对象 
+            // console.log(selectedDate.getTime());
+            // alert(dateControl.value);
+           
+                    // alert(time2);
+            // }
+        </script>
+
+                    <!-- <input type="date" value="2015-09-24"/> -->
+                </label>
+
+                <label>
+                    <span>End</span>
+                    <input type="datetime-local" name="end_time"
+                        value="2023-06-15T00:00" placeholder="请选择日期" />
+
+                </label>
+            </div></center>
+
+        <center><button id="loaddata">Load</button></center>
+        <br>
+
+        <script>
+    // 获取日期输入框元素
+    // const dateInput = document.getElementById("inTime");
+    
+    
+
+    // 将输入框的值转换为Date对象
+    // const selectedDate = new Date(dateInput.value);
+
+    // 检查是否成功转换日期字符串并且没有 NaN 值
+    // if (!isNaN(selectedDate.getTime())) {
+    // 在控制台日志中输出得到的日期对象 
+    // console.log(selectedDate.getTime());
+   
+</script>
+
+        <section class="section">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Weight</h5>
+
+                            <!-- Line Chart -->
+                            <div id="lineChart" style="min-height: 400px;"
+                                class="echart"></div>
+
+                            <script>
+                            // document.getElementById("confirm").addEventListener("click", () => {
+        
+    // })
+                            document.getElementById("loaddata").addEventListener("click", () => {
+                                
+                                var dateControl = document.querySelector('input[name="start_time"]');
+        
+        
+                                var time1 = dateControl.value;
+        var time2 = time1.replace('T', '%20');
+        // alert("get");
+        var dateControlEnd = document.querySelector('input[name="end_time"]');
+        // alert(dateControlEnd.value);
+    var time1end = dateControlEnd.value;
+    var time2end = time1end.replace('T', '%20');
+
+    var ApiUrl_rate = "http://175.178.93.43:5000/rate/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodpressure = "http://175.178.93.43:5000/bloodpressure/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_step = "http://175.178.93.43:5000/step/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_weight = "http://175.178.93.43:5000/weight/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodsugar = "http://175.178.93.43:5000/bloodsugar/11/" + time2 + ":00/" + time2end + ":00";
+    
+                                
+                                var data_allweight = [];
+                                var data_alltime_weight = [];
+                              
+
+                                    $.ajax({
+                                        type: "get",
+                                        url: ApiUrl_weight,
+                                        data: {},
+                                        success: function (data, status) {
+                                            if (status == "success") {
+                                                // alert("ok");
+
+                                                var k = 0;
+                                                for (var i = 0; i < data.length; i += parseInt(data.length / 10)) {
+                                                    data_allweight[k] = data[i].weight;
+                                                    data_alltime_weight[k] = data[i].time;
+                                                    k++;
+
+                                                }
+
+                                            }
+                                        },
+                                        error: function (e) {
+                                            alert("error");
+                                        },
+                                        complete: function () {
+                                            echarts.init(document.querySelector("#lineChart")).setOption({
+                                                xAxis: {
+                                                    type: 'category',
+                                                    data: data_alltime_weight
+                                                },
+                                                yAxis: {
+                                                    type: 'value'
+                                                },
+                                                series: [{
+                                                    data: data_allweight,
+                                                    type: 'line',
+                                                    smooth: true
+                                                }]
+                                            });
+                                        }
+
+
+                                    });
+
+
+
+                                
+
+
+
+                            });
+                        </script>
+                            <!-- End Line Chart -->
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Heart Rate</h5>
+
+                            <!-- Area Chart -->
+                            <div id="areaChart" style="min-height: 400px;"
+                                class="echart"></div>
+
+                            <script>
+                            // document.getElementById("confirm").addEventListener("click", () => {
+        
+    // })
+                            var data_allrate = [];
+                            var data_alltime_rate = [];
+                            document.getElementById("loaddata").addEventListener("click", () => {
+                                var dateControl = document.querySelector('input[name="start_time"]');
+        var time1 = dateControl.value;
+        var time2 = time1.replace('T', '%20');
+        // alert("get");
+        var dateControlEnd = document.querySelector('input[name="end_time"]');
+        // alert(dateControlEnd.value);
+    var time1end = dateControlEnd.value;
+    var time2end = time1end.replace('T', '%20');
+
+    var ApiUrl_rate = "http://175.178.93.43:5000/rate/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodpressure = "http://175.178.93.43:5000/bloodpressure/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_step = "http://175.178.93.43:5000/step/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_weight = "http://175.178.93.43:5000/weight/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodsugar = "http://175.178.93.43:5000/bloodsugar/11/" + time2 + ":00/" + time2end + ":00";
+
+                                // alert(dateControl.value);
+                                // var time1=dateControl.value;
+                                // var time2=time1.replace('T',' ');
+                                // alert(time2end);
+                                jQuery.support.cors = true;
+
+
+                               
+                                $.ajax({
+                                        type: "get",
+                                        url: ApiUrl_rate,
+                                        data: {},
+                                        success: function (data, status) {
+                                            if (status == "success") {
+                                                // alert("ok");
+                                                // alert(data[0].rate);
+                                                var k = 0;
+                                                for (var i = 0; i < data.length; i += parseInt(data.length / 10)) {
+                                                    data_allrate[k] = data[i].rate;
+                                                    data_alltime_rate[k] = data[i].time;
+                                                    k++;
+
+                                                }
+
+                                            }
+                                        },
+                                        error: function (e) {
+                                            alert("error");
+                                        },
+                                        complete: function () {
+                                            echarts.init(document.querySelector("#areaChart")).setOption({
+
+                                                xAxis: {
+                                                    type: 'category',
+                                                    boundaryGap: false,
+
+                                                    //   data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                                                    data: data_alltime_rate
+                                                },
+                                                yAxis: {
+                                                    type: 'value'
+                                                },
+                                                series: [{
+                                                    //   data: [data_allra, 900, 123, 768, 733, 789, 980],
+                                                    data: data_allrate,
+                                                    type: 'line',
+                                                    smooth: true,
+                                                    areaStyle: {}
+                                                }]
+                                            });
+                                        }
+
+
+                                    });
+                               
+
+
+                            });
+                        </script>
+                            <!-- End Area Chart -->
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Step</h5>
+
+                            <!-- Bar Chart -->
+                            <div id="barChart" style="min-height: 400px;"
+                                class="echart"></div>
+
+                            <script>
+
+                    var data_allstep=[];
+                  var data_alltime_step=[];
+
+                            document.getElementById("loaddata").addEventListener("click", () => {
+                                var dateControl = document.querySelector('input[name="start_time"]');
+        var time1 = dateControl.value;
+        var time2 = time1.replace('T', '%20');
+        // alert("getxx");
+        var dateControlEnd = document.querySelector('input[name="end_time"]');
+        // alert(dateControlEnd.value);
+    var time1end = dateControlEnd.value;
+    var time2end = time1end.replace('T', '%20');
+
+    var ApiUrl_rate = "http://175.178.93.43:5000/rate/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodpressure = "http://175.178.93.43:5000/bloodpressure/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_step = "http://175.178.93.43:5000/step/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_weight = "http://175.178.93.43:5000/weight/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodsugar = "http://175.178.93.43:5000/bloodsugar/11/" + time2 + ":00/" + time2end + ":00";
+
+                                // alert(dateControl.value);
+                                // var time1=dateControl.value;
+                                // var time2=time1.replace('T',' ');
+                                // alert(time2end);
+                                jQuery.support.cors = true;     
+
+                 
+                  
+                   
+                   
+    
+    $.ajax({
+        type: "get",
+        url: ApiUrl_step,
+        data: {},
+        success: function (data, status) {
+            if (status == "success") {
+                // alert("okstep");
+                
+                var k =0;
+                for(var i=0;i<data.length;i+=parseInt(data.length/10)){
+                    data_allstep[k]=data[i].step;
+                    data_alltime_step[k]=data[i].time;
+                    k++;
+
+                }
+                
+            }
+        },
+        error: function (e) {
+            alert("error");
+        },
+        complete: function () {
+            
+                echarts.init(document.querySelector("#barChart")).setOption({
+                                    xAxis: {
+                                        type: 'category',
+                                        data: data_alltime_step
+                                    },
+                                    yAxis: {
+                                        type: 'value'
+                                    },
+                                    series: [{
+                                        data: data_allstep,
+                                        type: 'bar'
+                                    }]
+                                });
+                     
+                    },
+        });
+    
+    
+    
+});
+
+
+   
+                        </script>
+                        <!-- End Bar Chart -->
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Blood Pressure</h5>
+      
+                    <!-- Vertical Bar Chart -->
+                    <div id="verticalBarChart" style="min-height: 400px;" class="echart"></div>
+      
+                    <script>
+                       var data_alltime_bloodpressure=[];
+                  var data_allbloodpressure_high=[];
+                  var data_allbloodpressure_low=[];
+                  
+
+                  document.getElementById("loaddata").addEventListener("click",  () => {
+                    var dateControl = document.querySelector('input[name="start_time"]');
+        var time1 = dateControl.value;
+        var time2 = time1.replace('T', '%20');
+        // alert("get");
+        var dateControlEnd = document.querySelector('input[name="end_time"]');
+        // alert(dateControlEnd.value);
+    var time1end = dateControlEnd.value;
+    var time2end = time1end.replace('T', '%20');
+
+    var ApiUrl_rate = "http://175.178.93.43:5000/rate/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodpressure = "http://175.178.93.43:5000/bloodpressure/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_step = "http://175.178.93.43:5000/step/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_weight = "http://175.178.93.43:5000/weight/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodsugar = "http://175.178.93.43:5000/bloodsugar/11/" + time2 + ":00/" + time2end + ":00";
+                    $.ajax({
+        type: "get",
+        url: ApiUrl_bloodpressure,
+        data: {},
+        success: function (data, status) {
+            if (status == "success") {
+                // alert("ok");
+                
+                var k =0;
+                for(var i=0;i<data.length;i+=parseInt(data.length/10)){
+                    data_allbloodpressure_high[k]=data[i].high_pressure;
+                    data_allbloodpressure_low[k]=data[i].low_pressure;
+                    data_alltime_bloodpressure[k]=data[i].time;
+                    k++;
+
+                }
+                
+            }
+        },
+        error: function (e) {
+            alert("error");
+        },
+        complete: function () {
+            echarts.init(document.querySelector("#verticalBarChart")).setOption({
+                          title: {
+                            text: 'World Population'
+                          },
+                          tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                              type: 'shadow'
+                            }
+                          },
+                          legend: {},
+                          grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                          },
+                          xAxis: {
+                            type: 'category',
+                            data: data_alltime_bloodpressure
+                          },
+                          yAxis: {
+                            type: 'value',
+                            boundaryGap: [0, 0.01]
+                          },
+                          
+                          series: [{
+                              name: 'high',
+                              type: 'bar',
+                              data: data_allbloodpressure_high
+                            },
+                            {
+                              name: 'low',
+                              type: 'bar',
+                              data: data_allbloodpressure_low
+                            }
+                          ]
+                        });
+                      }
+                
+                     
+                    });
+        
+    
+    
+    });
+
+                   
+                    </script>
+                    <!-- End Vertical Bar Chart -->
+      
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Blood Sugar</h5>
+
+                        <!-- Line Chart -->
+                        <div id="lineChartbs" style="min-height: 400px;" class="echart"></div>
+
+                        <script>
+                            var data_allbloodsugar = [];
+                            var data_alltime_bloodsugar = [];
+                            document.getElementById("loaddata").addEventListener("click", () => {
+
+                                var dateControl = document.querySelector('input[name="start_time"]');
+        var time1 = dateControl.value;
+        var time2 = time1.replace('T', '%20');
+        // alert("get");
+        var dateControlEnd = document.querySelector('input[name="end_time"]');
+        // alert(dateControlEnd.value);
+    var time1end = dateControlEnd.value;
+    var time2end = time1end.replace('T', '%20');
+
+    var ApiUrl_rate = "http://175.178.93.43:5000/rate/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodpressure = "http://175.178.93.43:5000/bloodpressure/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_step = "http://175.178.93.43:5000/step/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_weight = "http://175.178.93.43:5000/weight/11/" + time2 + ":00/" + time2end + ":00";
+    var ApiUrl_bloodsugar = "http://175.178.93.43:5000/bloodsugar/11/" + time2 + ":00/" + time2end + ":00";
+
+                                    $.ajax({
+                                        type: "get",
+                                        url: ApiUrl_bloodsugar,
+                                        data: {},
+                                        success: function (data, status) {
+                                            if (status == "success") {
+                                                // alert("okkkk");
+
+                                                var k = 0;
+                                                for (var i = 0; i < data.length; i += parseInt(data.length / 10)) {
+                                                    data_allbloodsugar[k] = data[i].blood_sugar;
+                                                    data_alltime_bloodsugar[k] = data[i].time;
+                                                    k++;
+
+                                                }
+
+                                            }
+                                        },
+                                        error: function (e) {
+                                            alert("error");
+                                        },
+                                        complete: function () {
+                                            // alert("right");
+                                            echarts.init(document.querySelector("#lineChartbs")).setOption({
+                                                xAxis: {
+                                                    type: 'category',
+                                                    data: data_alltime_bloodsugar
+                                                },
+                                                yAxis: {
+                                                    type: 'value'
+                                                },
+                                                series: [{
+                                                    data: data_allbloodsugar,
+                                                    type: 'line',
+                                                    smooth: true
+                                                }]
+                                            });
+                                        }
+
+
+                                    });
+
+
+
+                                });
+
+
+
+                          
+                        </script>
+                            <!-- End Line Chart -->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <p>Copyright &copy; 2023 CX & CH
+
+                        | Designed by CX</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Modal button -->
+        <!-- <div class="popup-icon">
+      <button id="modBtn" class="modal-btn"><img src="img/contact-icon.png" alt=""></button>
+    </div>   -->
+
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="header-title">Say hello to <em>Health</em></h3>
+                    <div class="close-btn"><img src="img/close_contact.png" alt></div>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <div class="col-md-6 col-md-offset-3">
+                        <form id="contact" action method="post">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <input name="name" type="text"
+                                            class="form-control" id="name"
+                                            placeholder="Your name..." required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <input name="email" type="email"
+                                            class="form-control" id="email"
+                                            placeholder="Your email..." required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <textarea name="message" rows="6"
+                                            class="form-control" id="message"
+                                            placeholder="Your message..."
+                                            required></textarea>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit"
+                                            class="btn">Send Message Now</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <section class="overlay-menu">
+      <div class="container">
+        <div class="row">
+          <div class="main-menu">
+              <ul>
+                  <li>
+                      <a href="index.html">Home - Full-width</a>
+                  </li>
+                  <li>
+                      <a href="masonry.html">Home - Masonry</a>
+                  </li>
+                  <li>
+                      <a href="grid.html">Home - Small-width</a>
+                  </li>
+                  <li>
+                      <a href="about.html">About Us</a>
+                  </li>
+                  <li>
+                      <a href="blog.html">Blog Entries</a>
+                  </li>
+                  <li>
+                      <a href="single-post.html">Single Post</a>
+                  </li>
+              </ul>
+              <p>We create awesome templates for you.</p>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+        <!-- <script -->
+            <!-- src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <!-- Vendor JS Files -->
+        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/chart.js/chart.umd.js"></script>
+        <script src="assets/vendor/echarts/echarts.min.js"></script>
+        <script src="assets/vendor/quill/quill.min.js"></script>
+        <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+        <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+        <script src="assets/vendor/php-email-form/validate.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="assets/js/main.js"></script>
+
+    </body>
+
+</html>
